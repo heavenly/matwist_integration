@@ -1,4 +1,4 @@
-# mal_and_twist_integr
+# matwist_integration
 Integrating MyAnimeList and Twist.moe
 
 Usage:
