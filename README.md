@@ -10,3 +10,7 @@ Usage:
 3. Done - all you need to do is setup myanimelistid for each anime when required.
 
 4. Read console for any information
+
+support and comments discord:
+
+https://discord.gg/fvzEQ34
