@@ -61,6 +61,7 @@ function per_site_basis() {
             var episode_number = GM_getValue(item);
             var anime_id = GM_getValue(item + "_id");
             send_post_update_episodes(anime_id, episode_number);
+            console.log("updated viewing progress for " + item + "(" + anime_id + ") to episode " + episode_number);
         });
         clear_keystore();
         
@@ -116,15 +117,20 @@ function get_current_page_mal_id() {
   
     var anime_id = GM_getValue(local_anime_data.anime_name + "_id");
     if (anime_id == null || anime_id == undefined) {
-        alert("anime id is null, open console for details");
-        console.clear();
-        console.log("use set_current_anime_id(myanimelist anime's id) to setup id for this page");
+        //alert("anime id is null, open console for details");
+        var user_response = parseInt(prompt("enter this anime's MAL id"));
+        if (user_response == null || user_response == undefined || isNaN(user_response)) {
+            console.clear();
+            console.log("use set_current_anime_id(myanimelist anime's id) to setup id for this page, or insert something normal into the textbox (by refreshing the page)"); 
+            return null;
+        }
+        set_current_anime_id(user_response);
+        location.reload(); //lazy fix to save the current episode properly
     }
     return anime_id;
 }
 
 function send_post_update_episodes(id, episode) {
-    console.log("updating viewing progress for " + id + ", to episode: " + episode);
     var csrf_token = GM_getValue("mal_csrf_token");
     var settings = {
     "url": "https://myanimelist.net/ownlist/anime/edit.json",
