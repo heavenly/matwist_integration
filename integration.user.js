@@ -2,7 +2,7 @@
 // @name        MAL & TWIST integration
 // @version     1.0
 // @author      moneysake
-// @description 3/31/2020, 4:51:47 PM
+// @description started / created at 3/31/20
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @match *://myanimelist.net/*
@@ -31,6 +31,11 @@ function append_to_keystore(anime_name) {
         return;
     }
     if (keystore_stored_val.length > 0) {
+        var keystore_values = keystore_stored_val.split("|");
+        if (anime_name in keystore_values) {
+            console.log("anime already prepared for MAL update")
+            return;
+        }
         GM_setValue("anime_keystore", keystore_stored_val + "|" + anime_name);
     } else {
         GM_setValue("anime_keystore", anime_name);
